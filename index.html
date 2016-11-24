@@ -1,10 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
+<html>
 
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <style>
+        .background {
+            fill: #eee;
+        }
+
+        line {
+            stroke: #fff;
+        }
+
+        text.active {
+            fill: red;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var names = ["R1 Growth", "R1 Value", "R1000", "R2000", "R2 Value", "R2 Growth", "DJ Indu", "S&P 500", "NDX"];
+        var margin = {
+                top: 80,
+                right: 0,
+                bottom: 10,
+                left: 80
+            },
+            width = 720,
+            height = 720;
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .style("margin-left", -margin.left + "px")
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var x = d3.scale.ordinal().rangeBands([0, width]);
+        x.domain(names);
+        var max = 0;
+
+        d3.json("stock2.json", function(stock) {
+            var clStock = jQuery.extend(true,[], stock);
+            function Merge(clStock, first, index) {
+                for (var k = 0; k < clStock[first].value.length; k++) {
+                    if (clStock[first].value[k] < clStock[index].value[k]) {
+                        clStock[first].value[k] = clStock[index].value[k];
+                    }
+                }
+                clStock[first].name = clStock[first].name + "-" + clStock[index].name;
+                clStock.splice(index, 1);
+                for (var p = 0; p < clStock.length; p++) {
+                    clStock[p].value.splice(index, 1);
+                }
+                return clStock;
+            }
+            while (clStock.length != 2) {
+                for (var i = 0; i < clStock.length; i++) {
+                    for (var j = 0; j < clStock[i].value.length; j++) {
+                        if ((max < clStock[i].value[j]) && (clStock[i].value[j] != 1)) {
+                            max = clStock[i].value[j];
+                        }
+                    }
+                    clStock = Merge(clStock, i, clStock[i].value.indexOf(max));
+                    max = 0;
+                }
+            }
+            var grp = svg.selectAll('g')
+                .data(stock)
+                .enter()
+                .append('g')
+                .attr('transform', function(d, i) {
+                    return 'translate(0, ' + 100 * i + ')';
+                });
+
+            grp.selectAll('rect')
+                .data(function(d,i) {
+                  console.log(d.value[i]);
+                    return d.value[i];
+                })
+                .enter()
+                .append('rect')
+                .attr('x', function(d, i) {
+                  console.log(d);
+                    return 100 * i;
+                })
+                .attr('width', 50)
+                .attr('height', 50);
+        });
+    </script>
 </body>
+
 </html>
