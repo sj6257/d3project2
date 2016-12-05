@@ -1,0 +1,28 @@
+.background {
+    fill: #eee;
+}
+
+line {
+    stroke: #fff;
+}
+
+text.active {
+    fill: red;
+}
+
+.tiles {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+.yAxis path {
+    fill: none;
+    stroke: none;
+    shape-rendering: crispEdges;
+}
+
+.xAxis path {
+    fill: none;
+    stroke: none;
+    shape-rendering: crispEdges;
+}
