@@ -191,7 +191,7 @@ function main(){
 
 
     // read file for various categories ( lets read one for the moment )
-    parseData("data/2010MarketCap.csv", "Market Capitalization", doStuff);
+    parseData("data/2010BlueChip.csv", "Market Capitalization", doStuff);
 
     // get exchanges
     // find pcc
