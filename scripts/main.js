@@ -191,7 +191,7 @@ function main(){
 
 
     // read file for various categories ( lets read one for the moment )
-    parseData("data/2010BlueChip.csv", "Market Capitalization", doStuff);
+    parseData("data/2011ExchangeRates.csv", "Market Capitalization", doStuff);
 
     // get exchanges
     // find pcc
@@ -213,8 +213,7 @@ function plotGraph(){
         width = 720,
         height = 720;
     var gridSize = Math.floor(width / 9 * 0.15);
-    colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"];
-
+    colors = ['#005824','#1A693B','#347B53','#4F8D6B','#699F83','#83B09B','#9EC2B3','#B8D4CB','#D2E6E3','#EDF8FB','#FFFFFF','#F1EEF6','#E6D3E1','#DBB9CD','#D19EB9','#C684A4','#BB6990','#B14F7C','#A63467','#9B1A53','#91003F'];
     var svg = d3.select("#matrix").append("svg")
         .attr("width", width + margin.left + margin.right + 100)
         .attr("height", height + margin.top + margin.bottom)
@@ -226,8 +225,9 @@ function plotGraph(){
         .domain([-1, 1])
         .range(colors); */
 
-     var colorScale=d3.scale.linear().domain([-1, 0, 1]).range(["darkslateblue", "white", "crimson"])
 
+   // var colorScale=d3.scale.linear().domain([-1, 0, 1]).range(["darkslateblue", "white", "crimson"])
+    var colorScale=d3.scale.quantile().domain([-1,0,1]).range(colors);
     var max = 0,
         maxi = 0,
         maxj = 0;
