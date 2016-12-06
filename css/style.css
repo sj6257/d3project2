@@ -11,8 +11,12 @@ text.active {
 }
 
 .tiles {
-    stroke: #fff;
-    stroke-width: 1px;
+    stroke: #000;
+    stroke-width: 0.5px;
+}
+
+text.active {
+  fill: red;
 }
 
 .yAxis path {
