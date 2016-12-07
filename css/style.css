@@ -30,3 +30,34 @@ text.active {
     stroke: none;
     shape-rendering: crispEdges;
 }
+
+
+.dot {
+
+    stroke-width: 1.5px;
+}
+
+.label {
+    font-size: 10px;
+}
+
+
+text {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+.tick text {
+    fill: black;
+    font-size: 11px;
+}
+
+.lm-line {
+    stroke: #2980b9;
+    stroke-width: 2px;
+    stroke-dasharray: 10 10;
+}
