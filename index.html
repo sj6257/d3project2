@@ -26,17 +26,28 @@
 </head>
 
 <body>
-    <div id="menu" class="row">
-        <span class="col-lg-2"> </span>
-        <button class="btn btn-primary col-lg-1" id="order">Clustered</button>
-        <span class="col-lg-2"> </span>
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Project 3</a>
     </div>
-    <span style="padding-bottom:20px" class="row"> </span>
-    <div id="matrix"></div>
-    <div>
-        <svg id="main2"></svg>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Market Cap</a></li>
+      <li><a href="#">Foriegn Exchange</a></li>
+      <li><a href="#">Blue Chip index</a></li>
+      <li><a href="#" id="order" class="">Clustered</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="row">
+    <div id="matrix" class="col-lg-7"></div>
+    <div class="col-lg-5">
+    <div class="row">
+    <svg id="main2"></svg></div>
+    <div class="row">
+    <svg id="legend" height="400"></svg></div>
     </div>
-
+  </div>
 </body>
 
 </html>
