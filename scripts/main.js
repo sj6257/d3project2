@@ -338,6 +338,8 @@ function plotGraph() {
             .attr("transform", "translate(65,14)")
             .style("text-anchor", "end")
             .style("font-size", "8px");
+            
+            drawLegend();
 
     }
 
@@ -398,6 +400,23 @@ function plotGraph() {
 
     function mouseout() {
         d3.selectAll("text").classed("active", false);
+    }
+    
+    function drawLegend(){
+      var w = 340, h = 400;
+
+			   var key = d3.select("#legend").attr("width", w+25).attr("height", h);
+      var legend = key.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1", "0%").attr("y1", "0%").attr("x2", "100%").attr("y2", "0%").attr("spreadMethod", "pad");
+      legend.append("stop").attr("offset", "0%").attr("stop-color", "#4d9221").attr("stop-opacity", 1);
+      legend.append("stop").attr("offset", "50%").attr("stop-color", "#ffffff").attr("stop-opacity", 1);
+			   legend.append("stop").attr("offset", "100%").attr("stop-color", "#c51b7d").attr("stop-opacity", 1);
+      key.append("rect").attr("width", w).attr("height", 40).style("fill", "url(#gradient)").attr("transform", "translate(10,100)");
+
+			   var x = d3.scale.linear().range([340, 0]).domain([-1, 1]);
+
+			   var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+			key.append("g").attr("class", "x axis").attr("transform", "translate(10,140)").call(xAxis).append("text").attr("transform", "rotate(0)").attr("y", 30).attr("x",200).attr("dy", ".70em").style("text-anchor", "end").text("Correlation");
     }
 
 }
