@@ -199,13 +199,13 @@ function main() {
 function plotGraph() {
 
     var margin = {
-            top: 80,
+            top: 30,
             right: 0,
             bottom: 10,
             left: 60
         },
-        width = 1024,
-        height = 1024;
+        width = 900,
+        height = 900;
     var gridSize = Math.floor(width / 9 * 0.14);
     colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"];
 
@@ -318,7 +318,7 @@ function plotGraph() {
             .orient("top");
         svg.append("g") // Add the X Axis
             .attr("class", "xAxis")
-            .attr("transform", "translate(95,0)")
+            .attr("transform", "translate(130,60)")
             .call(xAxis)
             .selectAll("text")
             .attr("y", 0)
@@ -329,7 +329,7 @@ function plotGraph() {
             .style("font-size", "8px");
         svg.append("g") // Add the X Axis
             .attr("class", "yAxis")
-            .attr("transform", "translate(40,0)")
+            .attr("transform", "translate(80,55)")
             .call(yAxis)
             .selectAll("text")
             .attr("y", 0)
@@ -338,7 +338,6 @@ function plotGraph() {
             .attr("transform", "translate(65,14)")
             .style("text-anchor", "end")
             .style("font-size", "8px");
-            
             drawLegend();
 
     }
@@ -358,10 +357,10 @@ function plotGraph() {
             .append("rect")
             .transition(t)
             .attr("x", function(d, i) {
-                return i * gridSize + 110;
+                return i * gridSize + 150;
             })
             .attr("y", function(d, i, j) {
-                return j * gridSize + 10;
+                return j * gridSize + 70;
             })
             //.attr("rx", 2)
             //.attr("ry", 2)
@@ -378,6 +377,22 @@ function plotGraph() {
             .on("mouseout", mouseout);
     }
 
+    function drawLegend(){
+      var w = 340, h = 400;
+
+			var key = d3.select("#legend").attr("width", w+25).attr("height", h);
+      var legend = key.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1", "0%").attr("y1", "0%").attr("x2", "100%").attr("y2", "0%").attr("spreadMethod", "pad");
+      legend.append("stop").attr("offset", "0%").attr("stop-color", "#4d9221").attr("stop-opacity", 1);
+      legend.append("stop").attr("offset", "50%").attr("stop-color", "#ffffff").attr("stop-opacity", 1);
+			legend.append("stop").attr("offset", "100%").attr("stop-color", "#c51b7d").attr("stop-opacity", 1);
+      key.append("rect").attr("width", w).attr("height", 40).style("fill", "url(#gradient)").attr("transform", "translate(10,100)");
+
+			var x = d3.scale.linear().range([340, 0]).domain([-1, 1]);
+
+			var xAxis = d3.svg.axis().scale(x).orient("bottom");
+
+			key.append("g").attr("class", "x axis").attr("transform", "translate(10,140)").call(xAxis).append("text").attr("transform", "rotate(0)").attr("y", 30).attr("x",200).attr("dy", ".70em").style("text-anchor", "end").text("Correlation");
+    }
 
     function hovered(d, i, j) {
         if (i > listOfXchanges.length - 1) {
@@ -401,23 +416,6 @@ function plotGraph() {
     function mouseout() {
         d3.selectAll("text").classed("active", false);
     }
-    
-    function drawLegend(){
-      var w = 340, h = 400;
-
-			   var key = d3.select("#legend").attr("width", w+25).attr("height", h);
-      var legend = key.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1", "0%").attr("y1", "0%").attr("x2", "100%").attr("y2", "0%").attr("spreadMethod", "pad");
-      legend.append("stop").attr("offset", "0%").attr("stop-color", "#4d9221").attr("stop-opacity", 1);
-      legend.append("stop").attr("offset", "50%").attr("stop-color", "#ffffff").attr("stop-opacity", 1);
-			   legend.append("stop").attr("offset", "100%").attr("stop-color", "#c51b7d").attr("stop-opacity", 1);
-      key.append("rect").attr("width", w).attr("height", 40).style("fill", "url(#gradient)").attr("transform", "translate(10,100)");
-
-			   var x = d3.scale.linear().range([340, 0]).domain([-1, 1]);
-
-			   var xAxis = d3.svg.axis().scale(x).orient("bottom");
-
-			key.append("g").attr("class", "x axis").attr("transform", "translate(10,140)").call(xAxis).append("text").attr("transform", "rotate(0)").attr("y", 30).attr("x",200).attr("dy", ".70em").style("text-anchor", "end").text("Correlation");
-    }
 
 }
 
@@ -425,167 +423,168 @@ function drawScatterChart(xExchange, yExchange) {
 
 
 
-/* BEFORE DATA */
-// chart size
-var outerWidth = 800;
-var outerHeight = 400;
-var margin = {
- left: 90,
- top: 30,
- right: 30,
- bottom: 40
-};
-var innerWidth = outerWidth - margin.left - margin.right;
-var innerHeight = outerHeight - margin.top - margin.bottom;
-var innerHeightOffset = innerHeight + 1;
-var rMin = 3; // "r" stands for radius
-var rMax = 20;
-var xAxisLabelText = xExchange;
-var xAxisLabelOffset = 30;
-var yAxisLabelText = yExchange;
-var yAxisLabelOffset = 40;
+    /* BEFORE DATA */
+    // chart size
+    var outerWidth = 620;
+    var outerHeight = 440;
+    var margin = {
+        left: 50,
+        top: 120,
+        right: 30,
+        bottom: 40
+    };
+    var innerWidth = outerWidth - margin.left - margin.right;
+    var innerHeight = outerHeight - margin.top - margin.bottom;
+    var innerHeightOffset = innerHeight + 1;
+    var rMin = 3; // "r" stands for radius
+    var rMax = 20;
+    var xAxisLabelText = xExchange;
+    var xAxisLabelOffset = 30;
+    var yAxisLabelText = yExchange;
+    var yAxisLabelOffset = 40;
 
-var zAxisLabelText = "Not Required atm"
-
-
-
-// Select SVG element on the DOM
-var SVG = d3.select("#main2").attr("width", outerWidth).attr("height", outerHeight);
-// Remove previous line charts
-SVG.selectAll("g").remove();
-//  Line chart group
-var group = SVG.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-//  xAxis Group
-var xAxisG = group.append("g").attr('class', 'axis').attr('transform', 'translate(0,' + innerHeightOffset + ')');
-// yAxis Group
-var yAxisG = group.append("g").attr('class', 'axis').attr('transform', 'translate(-2,0)');
-
-var colorLegendG = SVG.append("g")
- .attr("class", "color-legend")
- .attr("transform", "translate(600, 10)");
+    var zAxisLabelText = "Not Required atm"
 
 
 
-var xAxisLabel = xAxisG.append("text")
- .style("text-anchor", "middle")
- .attr("x", innerWidth / 2)
- .attr("y", xAxisLabelOffset)
- .attr("class", "label")
- .text(xAxisLabelText);
+    // Select SVG element on the DOM
+    var SVG = d3.select("#main2").attr("width", outerWidth).attr("height", outerHeight).attr("y",60);
+    // Remove previous line charts
+    SVG.selectAll("g").remove();
+    //  Line chart group
+    var group = SVG.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    //  xAxis Group
+    var xAxisG = group.append("g").attr('class', 'axis').attr('transform', 'translate(0,' + innerHeightOffset + ')');
+    // yAxis Group
+    var yAxisG = group.append("g").attr('class', 'axis').attr('transform', 'translate(-2,0)');
 
-var yAxisLabel = yAxisG.append("text")
- .style("text-anchor", "middle")
- .attr("transform", "translate(-" + yAxisLabelOffset + "," + (innerHeight / 2) + ") rotate(-90)")
- .attr("class", "label")
- .text(yAxisLabelText);
-
-
-
-// create axis scale: Pixel Space
-var xScale = d3.scale.linear().range([0, innerWidth]);
-var yScale = d3.scale.linear().range([innerHeight, 0]);
-//var rScale = d3.scale.linear().range([rMin,rMax]);
-var colorScale = d3.scale.category10();
-
-
-// define x and y axis
-var xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickFormat(d3.format(".2s"))
- .outerTickSize(0);
-var yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format(".2s"))
- .outerTickSize(0);
-
-var colorLegend = d3.legend.color()
-.scale(colorScale)
-.shapePadding(4)
-.shapeWidth(10)
-.shapeHeight(10)
-.labelOffset(4)
+    var colorLegendG = SVG.append("g")
+        .attr("class", "color-legend")
+        .attr("transform", "translate(600, 10)");
 
 
 
-// label
-d3.select("#label2").html("Visualization of " + xExchange + " vs " + yExchange);
+    var xAxisLabel = xAxisG.append("text")
+        .style("text-anchor", "middle")
+        .attr("x", innerWidth / 2)
+        .attr("y", xAxisLabelOffset)
+        .attr("class", "label")
+        .text(xAxisLabelText);
 
-/* AFTER DATA */
-
-// get Data
-
-
-var myArrayOfObjects = [];
-var myArrayOfArray=[];
-
-var xData = marketCap[xExchange].data;
-var yData = marketCap[yExchange].data;
-for (var i = 0; i < xData.length; i++) {
-
- if (xData[i]>0 && yData[i]>0)
- {
- var point = {
-     xColumn: xData[i], // date array global
-     yColumn: yData[i],
-     /* zColumn: data3[parseInt(timeYearString) - 1980],
-      year: timeYearString,
-      country:listOfLocalities[rowNumber],
-      colorColumn: getRegion(listOfLocalities[rowNumber]) */
- }
- myArrayOfObjects.push(point);
-     myArrayOfArray.push([xData[i],yData[i]]);
- }
-
-}
-
-
-//define axis domain scale: Data Space
-xScale.domain(d3.extent(myArrayOfObjects, function(d) {
- return d.xColumn;
-})).nice();
-yScale.domain(d3.extent(myArrayOfObjects, function(d) {
- return d.yColumn;
-})).nice();
-// rScale.domain(d3.extent(myArrayOfObjects, function (d){ return d.zColumn; })).nice();
-// colorScale.domain(region);
-//rScale.domain(d3.extent(myArrayOfObjects, function (d){ return d[rColumn]; }));
-xAxisG.call(xAxis);
-yAxisG.call(yAxis);
-//bind data
-
-
-var circles = group.selectAll("circle").data(myArrayOfObjects);
-
-//Enter
-circles.enter().append("circle");
-
-//update
-circles
- .attr("cx", function(d) {
-     return xScale(d.xColumn);
- })
- .attr("cy", function(d) {
-     return yScale(d.yColumn);
- })
- .attr("r","5")
-// .attr("r",       function (d){ return       rScale(d.zColumn);     })
- .attr("fill",    function (d){ return   colorScale(d.colorColumn); })
- .attr("class", "dot");
+    var yAxisLabel = yAxisG.append("text")
+        .style("text-anchor", "middle")
+        .attr("transform", "translate(-" + yAxisLabelOffset + "," + (innerHeight / 2) + ") rotate(-90)")
+        .attr("class", "label")
+        .text(yAxisLabelText);
 
 
 
-// colorLegendG.call(colorLegend);
+    // create axis scale: Pixel Space
+    var xScale = d3.scale.linear().range([0, innerWidth]);
+    var yScale = d3.scale.linear().range([innerHeight, 0]);
+    //var rScale = d3.scale.linear().range([rMin,rMax]);
+    var colorScale = d3.scale.category10();
 
 
-//draw line
+    // define x and y axis
+    var xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickFormat(d3.format(".2s"))
+        .outerTickSize(0);
+    var yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(d3.format(".2s"))
+        .outerTickSize(0);
 
-var data = myArrayOfArray
-var result = regression('linear', data);
-var slope = result.equation[0];
-var yIntercept = result.equation[1];
+    var colorLegend = d3.legend.color()
+        .scale(colorScale)
+        .shapePadding(4)
+        .shapeWidth(10)
+        .shapeHeight(10)
+        .labelOffset(4)
 
-lm_line=group.append("line");
 
-lm_line
- .attr("class", "lm-line")
- .attr("x1", xScale(xScale.domain()[0]))
- .attr("x2", xScale(xScale.domain()[1]))
- .attr("y1", yScale(xScale.domain()[0] *  slope + yIntercept ))
- .attr("y2", yScale(xScale.domain()[1] *  slope + yIntercept));
+
+    // label
+    d3.select("#label2").html("Visualization of " + xExchange + " vs " + yExchange);
+
+    /* AFTER DATA */
+
+    // get Data
+
+
+    var myArrayOfObjects = [];
+    var myArrayOfArray = [];
+
+    var xData = marketCap[xExchange].data;
+    var yData = marketCap[yExchange].data;
+    for (var i = 0; i < xData.length; i++) {
+
+        if (xData[i] > 0 && yData[i] > 0) {
+            var point = {
+                xColumn: xData[i], // date array global
+                yColumn: yData[i],
+                /* zColumn: data3[parseInt(timeYearString) - 1980],
+                 year: timeYearString,
+                 country:listOfLocalities[rowNumber],
+                 colorColumn: getRegion(listOfLocalities[rowNumber]) */
+            }
+            myArrayOfObjects.push(point);
+            myArrayOfArray.push([xData[i], yData[i]]);
+        }
+
+    }
+
+
+    //define axis domain scale: Data Space
+    xScale.domain(d3.extent(myArrayOfObjects, function(d) {
+        return d.xColumn;
+    })).nice();
+    yScale.domain(d3.extent(myArrayOfObjects, function(d) {
+        return d.yColumn;
+    })).nice();
+    // rScale.domain(d3.extent(myArrayOfObjects, function (d){ return d.zColumn; })).nice();
+    // colorScale.domain(region);
+    //rScale.domain(d3.extent(myArrayOfObjects, function (d){ return d[rColumn]; }));
+    xAxisG.call(xAxis);
+    yAxisG.call(yAxis);
+    //bind data
+
+
+    var circles = group.selectAll("circle").data(myArrayOfObjects);
+
+    //Enter
+    circles.enter().append("circle");
+
+    //update
+    circles
+        .attr("cx", function(d) {
+            return xScale(d.xColumn);
+        })
+        .attr("cy", function(d) {
+            return yScale(d.yColumn);
+        })
+        .attr("r", "5")
+        // .attr("r",       function (d){ return       rScale(d.zColumn);     })
+        .attr("fill", function(d) {
+            return colorScale(d.colorColumn);
+        })
+        .attr("class", "dot");
+
+
+
+    // colorLegendG.call(colorLegend);
+
+
+    //draw line
+
+    var data = myArrayOfArray
+    var result = regression('linear', data);
+    var slope = result.equation[0];
+    var yIntercept = result.equation[1];
+
+    lm_line = group.append("line");
+
+    lm_line
+        .attr("class", "lm-line")
+        .attr("x1", xScale(xScale.domain()[0]))
+        .attr("x2", xScale(xScale.domain()[1]))
+        .attr("y1", yScale(xScale.domain()[0] * slope + yIntercept))
+        .attr("y2", yScale(xScale.domain()[1] * slope + yIntercept));
 }
