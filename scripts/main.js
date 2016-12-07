@@ -306,10 +306,10 @@ function plotGraph() {
 
         var y = d3.scale.ordinal()
             .domain(listOfXchanges)
-            .rangePoints([gridSize / 2, (height * 0.83) - gridSize / 2]);
+            .rangePoints([gridSize / 2, (height * 0.89) - gridSize / 2]);
         var x = d3.scale.ordinal()
             .domain(listOfXchanges)
-            .rangePoints([gridSize / 2, (width * 0.83) - gridSize / 2]);
+            .rangePoints([gridSize / 2, (width * 0.89) - gridSize / 2]);
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left");
