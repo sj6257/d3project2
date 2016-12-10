@@ -220,7 +220,7 @@ function plotGraph() {
          .domain([-1, 1])
          .range(colors); */
 
-    var colorScale = d3.scale.linear().domain([-1, 0, 1]).range(["#c51b7d", "#f7f7f7", "#4d9221"]);
+    var colorScale = d3.scale.linear().domain([1, 0, -1]).range(["#4d9221", "#f7f7f7", "#c51b7d"]);
 
     var max = -2,
         maxi = 0,
@@ -382,12 +382,12 @@ function plotGraph() {
 
 			var key = d3.select("#legend").attr("width", w+25).attr("height", h);
       var legend = key.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1", "0%").attr("y1", "0%").attr("x2", "100%").attr("y2", "0%").attr("spreadMethod", "pad");
-      legend.append("stop").attr("offset", "0%").attr("stop-color", "#4d9221").attr("stop-opacity", 1);
+      legend.append("stop").attr("offset", "0%").attr("stop-color", "#c51b7d").attr("stop-opacity", 1);
       legend.append("stop").attr("offset", "50%").attr("stop-color", "#ffffff").attr("stop-opacity", 1);
-			legend.append("stop").attr("offset", "100%").attr("stop-color", "#c51b7d").attr("stop-opacity", 1);
+			legend.append("stop").attr("offset", "100%").attr("stop-color", "#4d9221").attr("stop-opacity", 1);
       key.append("rect").attr("width", w).attr("height", 40).style("fill", "url(#gradient)").attr("transform", "translate(10,100)");
 
-			var x = d3.scale.linear().range([340, 0]).domain([-1, 1]);
+			var x = d3.scale.linear().range([340, 0]).domain([1, -1]);
 
 			var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
