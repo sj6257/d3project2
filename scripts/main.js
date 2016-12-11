@@ -459,8 +459,10 @@ function plotGraph() {
             .on("mouseout", mouseout);
     }
 
+
+
     function drawLegend(){
-      var w = 340, h = 400;
+      var w = 340, h = 200;
 
 			var key = d3.select("#legend").attr("width", w+25).attr("height", h);
       var legend = key.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1", "0%").attr("y1", "0%").attr("x2", "100%").attr("y2", "0%").attr("spreadMethod", "pad");
