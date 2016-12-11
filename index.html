@@ -32,10 +32,12 @@
       <a class="navbar-brand" href="#">Project 3</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Market Cap</a></li>
-      <li><a href="#">Foriegn Exchange</a></li>
-      <li><a href="#">Blue Chip index</a></li>
-      <li><a href="#" id="order" class="">Clustered</a></li>
+      <li class="active"><a href="#" id="marketCap" onclick="updateToMarketCap()" >Market Cap</a></li>
+      <li><a href="#" id="blueChip" onclick="updateToBlueChip()" >Blue Chip index</a></li>
+      <li><a href="#" id="BSI" onclick="updateToBSI()" >Broad Stock Index Performance</a></li>
+        <li><a href="#" id="ER" onclick="updateToER()" >Foreign Exchange Rate</a></li>
+        <li><a href="#" id="TV" onclick="updateToTV()" >Turn Over Velocity</a></li>
+      <li><a href="#" id="order" class="" onclick="">Clustered</a></li>
     </ul>
   </div>
 </nav>
@@ -47,8 +49,8 @@
       <svg id="legend" height="200"></svg>
   </div>
   <div   class="row">
-      <div  id="matrix" class="col-lg-7">
-
+      <div   class="col-lg-7">
+          <svg  id="matrix"></svg>
       </div>
 
       <div class="col-lg-5 rightSide">
