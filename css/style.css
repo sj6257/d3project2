@@ -33,8 +33,9 @@ text.active {
 
 
 .dot {
-
+    stroke: #1f77b4;
     stroke-width: 1.5px;
+    fill:none
 }
 
 .label {
@@ -53,11 +54,45 @@ text {
 }
 .tick text {
     fill: black;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .lm-line {
     stroke: #2980b9;
     stroke-width: 2px;
     stroke-dasharray: 10 10;
+}
+
+.line{
+    fill:none;
+    stroke: #1f77b4;
+    stroke-width: 1.5px;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.circle1 {
+    fill: #30394F;
+    stroke: #30394F;
+
+
+}
+.circle2 {
+    fill: #6ACEEB;
+    stroke:#6ACEEB;
+
+}
+.intersect {
+    stroke: #0E6569;
+    stroke-width: 2px;
+    fill: #0E6569;
+
+}
+.graphtitle{
+    fill: #2980b9;
+    font-size: 14px;
 }
