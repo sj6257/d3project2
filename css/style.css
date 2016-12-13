@@ -11,12 +11,40 @@ text.active {
 }
 
 .tiles {
-    stroke: #000;
+    stroke: #FFF;
     stroke-width: 0.5px;
+}
+
+.tilesactive {
+    stroke:red;
+    stroke-width: 2px;
+
+}
+
+.tiles :hover {
+    stroke:red;
+    stroke-width: 3px;
+}
+
+.tileshover {
+
+    stroke:red;
+    stroke-width: 1.5px;
+
+}
+
+.tooltip{
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
 }
 
 text.active {
   fill: red;
+  font-weight: 800;
 }
 
 .yAxis path {
@@ -53,7 +81,6 @@ text {
     shape-rendering: crispEdges;
 }
 .tick text {
-    fill: black;
     font-size: 12px;
 }
 
@@ -100,4 +127,16 @@ text {
 .rightSide{
     margin-top: 110px;
 
+}
+
+#toggle
+{
+    margin-top: 20px;
+}
+
+#toggle span
+{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    margin-right: 5px;
 }

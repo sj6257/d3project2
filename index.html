@@ -47,14 +47,16 @@
 
     <div class="row">
         <span class="col-lg-1"></span>
-        <div class="col-lg-3">
-            <h2 style="opacity:0.8">Correlation Matrix</h2>
-            <span class="col-lg-1"></span><input type="checkbox" data-toggle="toggle" data-on="Clustered" data-off="Not clustered" data-size="mini" data-width="150" id="Clustoggle">
+        <div class="col-lg-2">
+            <h3 style="opacity:0.8">Correlation Matrix</h3>
         </div>
-        <div class="col-lg-3"><svg id="legend" height="200"></svg></div>
-        <span class="col-lg-1"></span>
+        <div class="col-lg-3" id="divLegend"><svg id="legend" height="200"></svg></div>
+        <div class="col-lg-3" id="toggle">
+         <span>Cluster</span>  <input type="checkbox" data-toggle="toggle" data-on="On" data-off="Off" data-size="mini" data-width="50" id="Clustoggle">
+        </div>
+
         <div class="col-lg-3">
-            <h2 style="opacity:0.8">Indvidual market data</h2>
+            <h3 style="opacity:0.8">Indvidual market data</h3>
         </div>
     </div>
     <div class="row">

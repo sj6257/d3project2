@@ -311,9 +311,12 @@ function plotGraph() {
         .style("margin-left", -margin.left + "px")
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
 
-    var colorScale = d3.scale.linear().domain([1, 0, -1]).range(["#4d9221", "#f7f7f7", "#c51b7d"]);
+    var colorScale = d3.scale.linear().domain([1, 0, -1]).range(["#4d9221", "#fcfcfa", "#c51b7d"]);
 
     var max = -2,
         maxi = 0,
@@ -478,13 +481,15 @@ function plotGraph() {
             .on("click", cellClick)
             .on("mouseover", mouseover)
             .on("mouseout", mouseout);
+
+
     }
 
 
 
     function drawLegend() {
         var w = 340,
-            h = 100;
+            h = 80;
 
         var key = d3.select("#legend").attr("width", w + 25).attr("height", h);
         var legend = key.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1", "0%").attr("y1", "0%").attr("x2", "100%").attr("y2", "0%").attr("spreadMethod", "pad");
@@ -497,7 +502,8 @@ function plotGraph() {
 
         var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
-        key.append("g").attr("class", "x axis").attr("transform", "translate(10,50)").call(xAxis).append("text").attr("transform", "rotate(0)").attr("y", 30).attr("x", 200).attr("dy", ".70em").style("text-anchor", "end").text("Correlation");
+        key.append("g").attr("class", "x axis").attr("transform", "translate(10,50)").call(xAxis);
+        key.append("text").attr("transform", "rotate(0)").attr("y", 30).attr("x", 200).attr("dy", ".70em").style("text-anchor", "end").text("Correlation");
     }
 
     function cellClick(d, i, j) {
@@ -512,20 +518,50 @@ function plotGraph() {
         drawLineChart(currentCategory, "second", yName);
         drawVenn(xName, yName, d);
         // drawCircleChart(xName, yName);
+
+        d3.selectAll('.tilesactive').classed('tilesactive',false);
+        d3.select(this).classed('tilesactive', true);
+        /*var xNode = d3.select(".xAxis").selectAll(".tick text").filter(function(d, i){
+            return this.text.indexOf(xName);
+
+        }); */
     }
 
-    function mouseover(p) {
-        d3.selectAll("text").classed("active", function(d, i) {
-            return i == p.y;
-        });
-        d3.selectAll("text").classed("active", function(d, i) {
-            return i == p.x;
-        });
+
+    function mouseover(d,i,j) {
+
+
+
+        d3.selectAll('.tileshover').classed('tileshover',false);
+        d3.select(this).classed('tileshover', true);
+
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", .9);
+        tooltip	.html( "Correlation" + ":  "  + d.toFixed(2))
+            .style("left", (d3.event.pageX+10) + "px")
+            .style("top", (d3.event.pageY - 38) + "px");
+
+       if (i > listOfXchanges.length - 1) {
+            j = i % listOfXchanges.length;
+            i = Math.floor(i / listOfXchanges.length);
+        }
+
+        d3.selectAll(".yAxis text").classed("active",function(d,b){ return i==b;});
+        d3.selectAll(".xAxis text").classed("active",function(d,b){ return j==b;});
+
+
     }
 
-    function mouseout() {
-        d3.selectAll("text").classed("active", false);
+    function mouseout(d,i,j) {
+
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+        d3.selectAll(".yAxis text").classed("active",false);
+
     }
+
 
 }
 
