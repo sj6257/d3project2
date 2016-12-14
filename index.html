@@ -32,33 +32,59 @@
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Project 3</a>
+      <a class="navbar-brand" href="index.html">H590 Interactive Visual Analytics</a>
     </div>
-    <ul class="nav navbar-nav">
-                <li class="active"><a href="#" id="marketCap" onclick="updateToMarketCap(this.offsetParent)">Market Cap</a></li>
-                <li><a href="#" id="blueChip" onclick="updateToBlueChip(this.offsetParent)">Blue Chip index</a></li>
-                <li><a href="#" id="BSI" onclick="updateToBSI(this.offsetParent)">Broad Stock Index Performance</a></li>
-                <li><a href="#" id="ER" onclick="updateToER(this.offsetParent)">Foreign Exchange Rate</a></li>
-                <li><a href="#" id="TV" onclick="updateToTV(this.offsetParent)">Turn Over Velocity</a></li>
-      <li><a href="#" id="order" class="" onclick="">Clustered</a></li>
+    <ul class="nav navbar-nav pull-right">
+                <li class="active"><a href="index.html">Visualization</a></li>
+                <li class=""><a href="documentation.html">Documentation</a></li>
+                <li><a href="https://youtu.be/bIkI-7Veoic" target="_blank" >Youtube Video</a></li>
+                <li><a href="https://github.iu.edu/sajagtap/d3project3" target="_blank" >GitHub</a></li>
     </ul>
   </div>
 </nav>
 
-    <div class="row">
-        <span class="col-lg-1"></span>
-        <div class="col-lg-2">
-            <h3 style="opacity:0.8">Correlation Matrix</h3>
-        </div>
-        <div class="col-lg-3" id="divLegend"><svg id="legend" height="200"></svg></div>
-        <div class="col-lg-3" id="toggle">
-         <span>Cluster</span>  <input type="checkbox" data-toggle="toggle" data-on="On" data-off="Off" data-size="mini" data-width="50" id="Clustoggle">
-        </div>
+  <div class="row">
+      <span class="col-lg-1"></span>
+      <div class="col-lg-2">
+      <h3 style="opacity:0.8">Correlation Matrix</h3>
+      </div>
+  </div>
+
+  <div class="row">
+      <span class="col-lg-1"></span>
+      <div class="col-lg-2">
+          <label id="lblselectionWidget">Select data variable</label>
+          <select id="selectionWidget" class="form-control ">
+              <option value="Market Capitalization">Market Capitalization</option>
+              <option value="Blue Chip Index">Blue Chip Index</option>
+              <option value="Broad Stock Index Performance">Broad Stock Index Performance</option>
+              <option value="Turn Over Velocity">Turn Over Velocity</option>
+              <option value="Exchange Rate">Exchange Rate</option>
+          </select>
+      </div>
+      <div class="col-lg-5">
+          <div class="col-lg-3">
+          <label id="Radios">Order by</label> <br>
+          <form class="distribution-radio options1">
+              <label class="radio-inline">
+                  <input id="NC" type="radio" name="distribution" value="Non Clustered" checked >Name
+              </label>
+              <label class="radio-inline">
+                  <input id="C" type="radio" name="distribution" value="Clustered">Cluster
+              </label>
+          </form>
+          </div>
+          <div class="col-lg-6">
+              <div class="" id="divLegend"><svg id="legend" height="200"></svg></div>
+          </div>
+
+      </div>
 
         <div class="col-lg-3">
             <h3 style="opacity:0.8">Indvidual market data</h3>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-7">
             <svg id="matrix"></svg>

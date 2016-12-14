@@ -201,23 +201,23 @@ function fetchData(dataCategory, dataRows) {
 
     //  console.log("Gotcha: "+ dataCategory+" :"+ marketCap.ex );
     if (dataCategory === "Market Capitalization") {
-        correlationMatrixMCap = buildCorrelationMatrix(listOfXchangesMcap, marketCap);
+        correlationMatrixMCap = buildCorrelationMatrix(listOfXchangesMcap.sort(), marketCap);
         console.log("MatrixGotcha: " + dataCategory);
         myDeferredMCap.resolve();
     } else if (dataCategory === "Broad Stock Index Performance") {
-        correlationMatrixBSI = buildCorrelationMatrix(listOfXchangesBSI, BSIPerformance);
+        correlationMatrixBSI = buildCorrelationMatrix(listOfXchangesBSI.sort(), BSIPerformance);
         console.log("MatrixGotcha: " + dataCategory);
         myDeferredBSI.resolve();
     } else if (dataCategory === "Turn Over Velocity") {
-        correlationMatrixTV = buildCorrelationMatrix(listOfXchangesTV, turnoverVelocity);
+        correlationMatrixTV = buildCorrelationMatrix(listOfXchangesTV.sort(), turnoverVelocity);
         console.log("MatrixGotcha: " + dataCategory);
         myDeferredTV.resolve();
     } else if (dataCategory === "Exchange Rate") {
-        correlationMatrixER = buildCorrelationMatrix(listOfXchangesER, exchangeRate);
+        correlationMatrixER = buildCorrelationMatrix(listOfXchangesER.sort(), exchangeRate);
         console.log("MatrixGotchaha: " + dataCategory);
         myDeferredER.resolve();
     } else if (dataCategory === "Blue Chip Index") {
-        correlationMatrixBC = buildCorrelationMatrix(listOfXchangesBC, blueChip);
+        correlationMatrixBC = buildCorrelationMatrix(listOfXchangesBC.sort(), blueChip);
         console.log("MatrixGotcha: " + dataCategory);
         myDeferredBC.resolve();
     }
@@ -307,7 +307,7 @@ function plotGraph() {
     // Remove previous  charts
     svg.selectAll("g").remove();
     svg.attr("width", width + margin.left + margin.right + 150)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height + margin.top + margin.bottom+100)
         .style("margin-left", -margin.left + "px")
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -349,6 +349,38 @@ function plotGraph() {
 
     DrawMatrix(correlationMatrix, t, gridSize);
     Drawaxis(listOfXchanges, t, gridSize);
+
+    $('input[type=radio][name=distribution]').on('change', function() {
+
+        switch($(this).val()) {
+            case 'Clustered':
+                Cluster(listOfXchanges, orderString, correlationMatrix, order);
+                break;
+            case 'Non Clustered':
+
+            /*    if (currentCategory === "Market Capitalization") {
+                    correlationMatrixMCap = buildCorrelationMatrix(listOfXchangesMcap.sort(), marketCap);
+
+                } else if (currentCategory === "Broad Stock Index Performance") {
+                    correlationMatrixBSI = buildCorrelationMatrix(listOfXchangesBSI.sort(), BSIPerformance);
+
+                } else if (currentCategory === "Turn Over Velocity") {
+                    correlationMatrixTV = buildCorrelationMatrix(listOfXchangesTV.sort(), turnoverVelocity);
+
+                } else if (currentCategory === "Exchange Rate") {
+                    correlationMatrixER = buildCorrelationMatrix(listOfXchangesER.sort(), exchangeRate);
+
+                } else if (currentCategory === "Blue Chip Index") {
+                    correlationMatrixBC = buildCorrelationMatrix(listOfXchangesBC.sort(), blueChip);
+
+                }
+
+                plotGraph(); */
+             location.reload();
+                break;
+        }
+
+    });
 
     d3.select("#order")
         .on("click", function(d) {
@@ -416,7 +448,7 @@ function plotGraph() {
             .orient("top");
         svg.append("g") // Add the X Axis
             .attr("class", "xAxis")
-            .attr("transform", "translate(140,65)")
+            .attr("transform", "translate(160,115)")
             .call(xAxis)
             .selectAll("text").data(listOfXchanges)
             .enter()
@@ -428,7 +460,7 @@ function plotGraph() {
 
         svg.append("g")
             .attr("class", "yAxis")
-            .attr("transform", "translate(150,50)")
+            .attr("transform", "translate(175,100)")
             .call(yAxis)
             .selectAll("text").data(listOfXchanges)
             .enter()
@@ -463,10 +495,10 @@ function plotGraph() {
             .append("rect")
             .transition(t)
             .attr("x", function(d, i) {
-                return i * gridSize + 150;
+                return i * gridSize + 170;
             })
             .attr("y", function(d, i, j) {
-                return j * gridSize + 70;
+                return j * gridSize + 120;
             })
             //.attr("rx", 2)
             //.attr("ry", 2)
@@ -496,14 +528,14 @@ function plotGraph() {
         legend.append("stop").attr("offset", "0%").attr("stop-color", "#c51b7d").attr("stop-opacity", 1);
         legend.append("stop").attr("offset", "50%").attr("stop-color", "#ffffff").attr("stop-opacity", 1);
         legend.append("stop").attr("offset", "100%").attr("stop-color", "#4d9221").attr("stop-opacity", 1);
-        key.append("rect").attr("width", w).attr("height", 40).style("fill", "url(#gradient)").attr("transform", "translate(10,10)");
+        key.append("rect").attr("width", w).attr("height", 20).style("fill", "url(#gradient)").attr("transform", "translate(10,30)");
 
         var x = d3.scale.linear().range([340, 0]).domain([1, -1]);
 
         var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
         key.append("g").attr("class", "x axis").attr("transform", "translate(10,50)").call(xAxis);
-        key.append("text").attr("transform", "rotate(0)").attr("y", 30).attr("x", 200).attr("dy", ".70em").style("text-anchor", "end").text("Correlation");
+        key.append("text").attr("transform", "rotate(0)").attr("y", 5).attr("x", 60).attr("dy", ".70em").style("text-anchor", "end").style("font-weight", "Bold").text("Legend");
     }
 
     function cellClick(d, i, j) {
@@ -783,6 +815,56 @@ function Cluster() {
 
     //plotGraph()
 }
+
+
+
+
+$(document).ready(function() {
+
+    d3.select("#selectionWidget")
+        .on('change', function () {
+
+
+
+            document.getElementById("NC").checked = true;
+
+            var selection = document.getElementById('selectionWidget');
+            var value = "";
+            if (selection.options.length > 0) {
+
+
+
+                value = selection.options[selection.selectedIndex].value;
+
+                if (value === "Market Capitalization") {
+                    currentCategory = "Market Capitalization";
+                    plotGraph();
+                }
+                else if (value === "Blue Chip Index") {
+                    currentCategory = "Blue Chip Index";
+                    plotGraph();
+                }
+                else if (value === "Broad Stock Index Performance") {
+                    currentCategory = "Broad Stock Index Performance";
+                    plotGraph();
+                }
+                else if (value === "Turn Over Velocity") {
+                    currentCategory = "Turn Over Velocity";
+                    plotGraph();
+                }
+                else if (value === "Exchange Rate") {
+                    currentCategory = "Exchange Rate";
+                    plotGraph();
+                }
+
+
+            }
+
+        });
+
+
+});
+
 
 function main() {
 
