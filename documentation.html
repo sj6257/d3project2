@@ -37,7 +37,7 @@
         <ul class="nav navbar-nav pull-right">
             <li class="active"><a href="index.html">Visualization</a></li>
             <li class=""><a href="documentation.html">Documentation</a></li>
-            <li><a href="https://youtu.be/bIkI-7Veoic" target="_blank" >Youtube Video</a></li>
+            <li><a href="https://youtu.be/_BrKbdnOXEc" target="_blank" >Youtube Video</a></li>
             <li><a href="https://github.iu.edu/sajagtap/d3project3" target="_blank" >GitHub</a></li>
         </ul>
     </div>
@@ -49,60 +49,80 @@
 
                 <div class="content">
                     <h2>Documentation</h2>
+                    <h3>Summary</h3>
+                    <p>This visualization demonstrates the degree of interdependence of world stock market using various stock market indicator like Market Capitalization, Blue-chip index, Broad Stock Index Performance, Currency Exchange Rate and Share Turnover Velocity.  The data used for the visualization is borrowed from the monthly reports of World Federation of Exchanges. The report covers stock market data of most of the world’s stock exchanges. This visualization shows data of year 2010.  </p>
+                    <p>The visualization uses Pearson correlation coefficient to find degree of correlation between two chosen stock in the matrix. The correlation co-efficient value oscillates between -1 to +1. If the value is -1 the correlation is negative and if its +1 it can be assumed that there is positive correlation and two stock market, follow each other. On the other hand, if the correlation is 0, it means two stock market not dependent on each other and we can’t establish relationship between them. The visualization represents negative values in red color and positive values with the green color in correlation matrix.  </p>
+                    <p>Additionally, visualization can cluster strongly related markets based on their correlation coefficient. The visualization also show trend line when clicked on any cell in the matrix along with Venn diagram to visualize the degree and form of the interdependence. </p>
+                    <p>Visualization show that, emerging markets move together with markets of developed countries up to some extent. This information can be used by investor in diversifying their portfolio to hedge the potential risk in the market. It can also be used by the economists to predict domino effect if any one of the market takes hit.</p>
+
                     <h4 style="font-style:italic">Design Process</h4>
-
-                    <img src="images/image1.jpg" alt="Design Sketches" width="50%" style="display:block; margin:0 auto;">
-
-                    <img src="images/image2.jpg" alt="Design Sketches" width="50%" style="display:block; margin:0 auto; margin-top: 10px">
+                    <p>Design process began with collecting and analyzing nature of data. As data was in excel format and had many more indicator than what we were interested. We had to clean data and create comma separated file from the monthly excel report of World Federation of Exchanges.
+                    <br><img src="images/image1.jpg" alt="Design Sketches" width="50%" style="display:block; margin:0 auto;"></p>
+                    <p>Once we had data we began brainstorming best ways to find the correlation from the raw data. We came across the Pearson Correlation Co-efficient (PCC) which deduce the correlation between two sets of data. This co-efficient was idle for our problem statement. We decided to utilize the PCC.
+                    <br><img src="images/image2.jpg" alt="Design Sketches" width="50%" style="display:block; margin:0 auto; margin-top: 10px"></p>
+                    <p>The next challenge was to effectively show the PCC values between two stock exchange and individual stock market indicator trend over the year. We started brainstorming various ideas like parallel co-ordinate, word map etc. but at the end we settled with the Correlation matrix, Time series line graph and Venn diagram. Correlation matrix best represent relation between two variables in the array of variables.
+                    <br><img src="images/image3.jpeg" alt="Design Sketches" width="50%" style="display:block; margin:0 auto; margin-top: 10px">
+                     </p>
 
 
                     <h3 style="margin:22px 0">RATIONALE OF DESIGN CHOICES</h3>
-                    <h4 style="font-style:italic">Design and Position of Legend</h4>
-                    <p>The legend is displayed in a vertical manner to occupy minimal space and positioned at the top so that only the visualization occupies the space below for a distraction-free view. It also keeps every-thing above the fold, eliminating the need to scroll.</p>
-
-                    <h4 style="font-style:italic">Radio Button for State and County</h4>
-                    <p>For toggling between State and County radio buttons (and not drop-down menus) have been used to eliminate unnecessary clicks and ease of visibility as switching between these two views is something a user might do frequently.</p>
-
-                    <h4 style="font-style:italic">General Design</h4>
-                    <p>In general, we followed a minimalistic design approach, without overwhelming the user with too much information. We used a pleasant color scheme that is both color-blind friendly and does not cause irritation to the user’s eyes with prolonged exposure to it.</p>
-
-                    <h4 style="font-style:italic">Choice of Charts</h4>
-                    <img src="imgs/table.png" width="50%" style="display:block; margin:0 auto; margin-top: 10px">
+                    <p>
+                      <ul>
+                        <li><p><b>Correlation Matrix Heat map</b>:The number of stock exchanges and their relationship with every other stock market yields to large amount data and matrix were natural choice for such visualization. </p></li>
+                        <li><p><b>Color</b> for showing degree of correlation is represented by the green and red color.  Greener the cell higher the correlation and red the cell inverse the relationship. There was critical design decision made to show element with no correlation with white color to separate out them from rest of cells. </p></li>
+                        <li><p><b>Trend of Stock Market</b>: Visualization aids user with trend of actual market indicator value for selected cell. </p></li>
+                        <li><p><b>Venn Diagram</b>: It is additional visual cue to reinforce the degree of correlation with visual instead of number and color. It utilizes the circles, if two circle overlap each other it means that they have positive correlation and vice versa. </p></li>
+                      </ul>
 
                     <h3>DISCOVERING FACTS</h3>
                     <ul>
                         <li>
-                            The sex-ratio is fairly equal mostly 50-50 (51% Female- 49% Male sometimes.) This shows that if no cultural factors affect the natural process of reproduction then the chances of birth of a male or a female is truly 50-50, since America does not have the issue female feticide, which is gener-ally why certain countries have a skewed sex-ratio.
-
+                          NYSE and Nation stock Exchange Small multiple across various parameter showing positive relation
+                          <img src="images/nysense.png" width="70%" style="display:block; margin:0 auto; margin-top: 10px">
                         </li>
                         <li>
-                            Majority of America lies above 1, which is the threshold for income-poverty ratio for a house-hold/individual to be considered above poverty level.
+                          NYSE maintains positive relationship with most of world market showing other market react in same manner to the movement of New York Stock Exchange
+                          <img src="images/nyseworld.png" width="70%" style="display:block; margin:0 auto; margin-top: 10px">
                         </li>
                         <li>
-                            There is a co-relation between the educational attainment by place of birth and the presence of established universities in the state, California being the highest
-                            <img src="imgs/pt3.png" width="50%" style="display:block; margin:0 auto; margin-top: 10px">
+                          American, Asian, European and Middle East shows group movement and maintain positive correlation among themselves.
                         </li>
                         <li>
-                            More people in states with major cities, like New York and California, prefer to walk. This could probably be because of the high population, crowded streets and maybe because more people can afford to live close to their office.
-                                                        <img src="imgs/pt4.png" width="50%" style="display:block; margin:0 auto; margin-top: 10px">
-
+                            Athens Stock Market consistently shows negative correlation with the American stock market like NYSE and NASDAQ
+                            <img src="images/nasdaqathens.png" width="70%" style="display:block; margin:0 auto; margin-top: 10px">
                         </li>
 
                     </ul>
 
+                    <h3>FAQ</h3>
+                    <ol>
+                      <li><b>What is the 'Correlation Coefficient’?</b><br>
+The correlation coefficient is a measure that determines the degree to which two variables' movements are associated. The range of values for the correlation coefficient is -1.0 to 1.0. If a calculated correlation is greater than 1.0 or less than -1.0, a mistake has been made.
+A correlation of -1.0 indicates a perfect negative correlation, while a correlation of 1.0 indicates a perfect positive correlation. <a href="http://www.investopedia.com/terms/c/correlationcoefficient.asp#ixzz4SlfAnR3Y">Read More</a></li>
+<li><b>What is 'Market Capitalization’?</b><br>
+Market capitalization refers the total dollar market value of a company's outstanding shares. Commonly referred to as "market cap," it is calculated by multiplying a company's shares outstanding by the current market price of one share. The investment community uses this figure to determine a company's size, as opposed to using sales or total asset figures
+<a href="http://www.investopedia.com/terms/m/marketcapitalization.asp#ixzz4SlMH7u00">Read more</a></li>
+<li><b>What is the 'Blue-Chip Index' ?</b><br>
+The blue-chip index is a stock index that tracks the shares of the top-performing publicly traded companies. Blue-chip stocks represent companies that are financially stable, well established and provide good returns for investors, making them desirable investments. Because blue-chip companies tend to perform similarly to the economy the performance of a blue-chip index may be considered a gauge of an industry's or region's economic strength. It is for this reason that news reports typically mention how a major blue-chip stock index, such as the Dow Jones Industrial Average (DIJA), performed that day.
+ <a href="http://www.investopedia.com/terms/b/blue-chip-index.asp#ixzz4SlNElfAx">Read More</a></li>
+ <li><b>What is ‘Broad Stock Index Performance’?</b><br>
+Broad indexes are, in general, market capitalization-weighted, including a large sample of listed domestic companies, as the all-share or composite indexes. They are generally recalculated to adjust to capital operations and to modifications in the company composition of the index. The index can be market capitalization-weighted or free float based. </li>
+<li><b>What is ‘Share Turn Over Velocity’?</b><br>
+The turnover velocity is the ratio between the Electronic Order Book (EOB) turnover of domestic shares and their market capitalization. The value is annualized by multiplying the monthly average by 12.
+Share turnover is a measure of stock liquidity calculated by dividing the total number of shares traded over a period by the average number of shares outstanding for the period. The higher the share turnover, the more liquid the share of the company.
+<a href="http://www.investopedia.com/terms/s/shareturnover.asp">Read More</a></li>
+<li><b>What is 'International Currency Exchange Rate’?</b><br>
+The rate at which two currencies in the market can be exchanged. International currency exchange rates display how much of one unit of a currency can be exchanged for another currency. Currency exchange rates can be floating; in which case they change continually based on a multitude of factors. Alternatively, the exchange rates of some foreign currencies are pegged, or fixed, to other currencies, in which case they move in tandem with the currencies to which they are pegged.
+<a href="http://www.investopedia.com/terms/forex/i/international-currency-exchange-rates.asp#ixzz4SlPlKhqp">Read More</a>  </li>
+                    </ol>
 
                     <h5 style="font-weight:bold">Resources referred/used</h5>
                     <ul>
-                        <li><a href="http://www.census.gov/en.html">US Census</a></li>
-                        <li><a href="https://www.socialexplorer.com">Social Explorer</a></li>
-                        <li><a href="http://leafletjs.com/examples/choropleth/">Interactive Choropleth Map</a></li>
-                        <li><a href="http://www.perceptualedge.com/articles/visual_business_intelligence/rules_for_using_color.pdf">Practicle rules of using color in charts </a></li>
-                        <li><a href="https://www.tableau.com/sites/default/files/media/which_chart_v6_final_0.pdf">Which chart or graph is right for you?</a></li>
+                        <li><a href="http://www.world-exchanges.org/home/">World Federation of exchanges</a></li>
                         <li><a href="http://colorbrewer2.org/">Color Brewer</a></li>
-                        <li><a href="http://chimera.labs.oreilly.com/books/1230000000345/ch12.html">Chapter 12. Geomapping</a></li>
                         <li><a href="http://stackoverflow.com">StackOverflow</a></li>
-                        <li><a href="http://labratrevenge.com/d3-tip/">Tooltips for d3.js visualizations</a></li>
-                        <li><a href="https://bl.ocks.org/mbostock/3887051">Grouped Bar Chart</a></li>
+                        <li><a href="https://harthur.github.io/clusterfck/">Clustering Algorithm</a></li>
+                        <li><a href="https://github.com/benfred/venn.js/">Venn diagram</a></li>
                         <li><a href="http://bl.ocks.org">Bl.ocks.org</a></li>
                     </ul>
                 </div>
